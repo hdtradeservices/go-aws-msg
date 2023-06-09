@@ -13,7 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/sns"
-	msg "github.com/zerofox-oss/go-msg"
+	msg "github.com/hdtradeservices/go-msg"
 )
 
 // Tests that msgAttributesToSNSAttributes successfully converts msg.Attributes
