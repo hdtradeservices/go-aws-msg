@@ -14,7 +14,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/sqs"
-	msg "github.com/zerofox-oss/go-msg"
+	msg "github.com/hdtradeservices/go-msg"
 )
 
 // Failing receiver returns an error upon consumption of a Message.
@@ -71,7 +71,7 @@ func TestServer_Serve(t *testing.T) {
 
 	go func() {
 		r := &SimpleReceiver{t: t}
-		if err := srv.Serve(r); err != nil {
+		if err := srv.Serve(context.Background(), r); err != nil {
 			t.Errorf("server died %s", err)
 		}
 	}()
@@ -130,7 +130,7 @@ func TestServer_Serve_retries(t *testing.T) {
 			}()
 
 			r := &SimpleReceiver{t: t}
-			err = srv.Serve(r)
+			err = srv.Serve(context.Background(), r)
 			if strings.Index(err.Error(), "InvalidClientTokenId: The security token included in the request is invalid") != 0 {
 				t.Errorf("Expected error message to start with `InvalidClientTokenId: The security token included in the request is invalid`, was `%s`", err.Error())
 			}
@@ -152,7 +152,7 @@ func TestServer_Concurrency(t *testing.T) {
 
 	go func() {
 		r := &SimpleReceiver{t: t}
-		if err := srv.Serve(r); err != nil {
+		if err := srv.Serve(context.Background(), r); err != nil {
 			t.Errorf("server died %s", err)
 		}
 	}()
@@ -173,7 +173,7 @@ func TestServer_ServeFailingReceiver(t *testing.T) {
 
 	go func() {
 		r := &FailingReceiver{t: t}
-		if err := srv.Serve(r); err != nil {
+		if err := srv.Serve(context.Background(), r); err != nil {
 			t.Errorf("server died %s", err)
 		}
 	}()
@@ -241,7 +241,7 @@ func TestServer_ShutdownClean(t *testing.T) {
 
 	go func() {
 		r := &SimpleReceiver{t: t}
-		if err := srv.Serve(r); err != msg.ErrServerClosed {
+		if err := srv.Serve(context.Background(), r); err != msg.ErrServerClosed {
 			t.Logf("server died %s", err)
 		}
 	}()
@@ -262,7 +262,7 @@ func TestServer_ShutdownHard(t *testing.T) {
 
 	go func() {
 		r := &SimpleReceiver{t: t}
-		if err := srv.Serve(r); err != msg.ErrServerClosed {
+		if err := srv.Serve(context.Background(), r); err != msg.ErrServerClosed {
 			t.Logf("server died %s", err)
 		}
 	}()

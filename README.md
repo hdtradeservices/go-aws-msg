@@ -46,7 +46,7 @@ This library contains the Topics
 and Servers which interact
 with SNS and SQS.
 
-[go-msg]: https://github.com/zerofox-oss/go-msg
+[go-msg]: https://github.com/hdtradeservices/go-msg
 [SNS]: https://aws.amazon.com/documentation/sns/
 [SNS-PubSub]: https://aws.amazon.com/sns/#SNSpubsub
 [SQS]: https://aws.amazon.com/documentation/sqs/

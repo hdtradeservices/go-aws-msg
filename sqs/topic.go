@@ -15,7 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
 	"github.com/aws/aws-sdk-go/service/sqs/sqsiface"
-	msg "github.com/zerofox-oss/go-msg"
+	msg "github.com/hdtradeservices/go-msg"
 )
 
 // Topic configures and manages SQSAPI for sqs.MessageWriter

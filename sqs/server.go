@@ -19,8 +19,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
 	"github.com/aws/aws-sdk-go/service/sqs/sqsiface"
+	msg "github.com/hdtradeservices/go-msg"
 	"github.com/zerofox-oss/go-aws-msg/retryer"
-	msg "github.com/zerofox-oss/go-msg"
 )
 
 func init() {
@@ -82,7 +82,7 @@ func (s *Server) convertToAttrs(attr msg.Attributes, attrs map[string]*string) {
 // Shutdown is called on the Server.
 //
 // NewServer should be used prior to running Serve.
-func (s *Server) Serve(r msg.Receiver) error {
+func (s *Server) Serve(ctx context.Context, r msg.Receiver) error {
 	for {
 		select {
 		case <-s.serverCtx.Done():
